@@ -16,9 +16,9 @@ export const Home = () => {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }} marginTop={'20px'} >
+    <Box sx={{ flexGrow: 1, marginTop: '20px' }} >
       <Grid 
-        sx={{marginBottom: 5, paddingLeft: 5}}
+        sx={{marginBottom: 5, paddingLeft: [2,2,10,10]}}
         container 
         direction={["column","column","row","row"]}
         columnSpacing={{ xs: 2, md: 5 }}
@@ -33,14 +33,19 @@ export const Home = () => {
       </Grid>
 
       <Grid 
-        alignContent={'center'} 
-        container columnSpacing={{ xs: 2, md: 20 }} 
-        rowSpacing={{ xs: 2, md: 5 }} 
-        columns={{xs: 1, sm: 9,  md: 16}}
+        container
+        direction={["column", "row", "row", "row"]}
+        justifyContent="center"
+        alignItems="center"
+        paddingLeft={[0,5,5,5]}
+        columnSpacing={{ xs: 2, sm: 0, md: 10 }} 
+        rowSpacing={{ xs: 2, md: 5 }}
+        columns={{xs: 1, sm: 9,  md: 12, lg: 16}}
       >
+     
         {
           products.map((product)=>(
-            <Grid item xs={2} sm={4} md={4} marginBottom={2} key={product.id}>
+            <Grid item xs={1} sm={4} md={4} marginBottom={2} key={product.id}>
               <CustomCard {...product}/>
             </Grid>
           ))

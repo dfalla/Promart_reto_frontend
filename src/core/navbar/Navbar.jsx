@@ -60,7 +60,7 @@ export const Navbar = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth={["xs", "sm", "md", "xl"]}>
+      <Container maxWidth={"100"}>
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -91,9 +91,11 @@ export const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map(({title}) => (
-                <MenuItem key={title} onClick={handleCloseNavMenu}>
-                  {title}
+              {pages.map(({title, path}) => (
+                <MenuItem key={title} onClick={handleCloseNavMenu} >
+                  <NavLink to={path} style={{textDecoration: 'none', color: 'black'}}>
+                    {title} 
+                  </NavLink>
                 </MenuItem>
               ))}
             </Menu>
@@ -136,9 +138,9 @@ export const Navbar = () => {
                 color="inherit"
               >
                 <Badge badgeContent={productsInCart.length} color="error">
-                  <IconButton href='/carrito' color='white'>
-                    <ShoppingCartIcon/>  
-                  </IconButton>
+                    <NavLink to='/carrito' style={{color: 'white'}}>
+                      <ShoppingCartIcon/>  
+                    </NavLink>
                 </Badge>
               </IconButton>
               <Tooltip title="Open settings">

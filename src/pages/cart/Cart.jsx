@@ -13,7 +13,6 @@ export const Cart = () => {
     dispatch(getTotals());
   }, [cart, dispatch]);
 
-  console.log('productos en el carrito', cart.productsInCart)
 
   return (
     <Box sx={{ width: '100%' }} marginTop={3}>
