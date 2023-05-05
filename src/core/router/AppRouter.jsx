@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuthStore } from '../hooks/useAuthStore';
-import { Login, Home, Car } from '../../pages';
+import { Login, Home, Cart } from '../../pages';
 import { Layout } from '../layout';
 
 export const AppRouter = () => {
@@ -34,7 +34,7 @@ export const AppRouter = () => {
                     <>
                         <Route path="/" element={<Layout/>}>
                             <Route index element={<Home/>}/>
-                            <Route path="/carrito" element={<Car/>}/>
+                            <Route path="/carrito" element={<Cart/>}/>
                         </Route>
 
                         <Route path="/*" element={<Navigate to="/"/>}/>

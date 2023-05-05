@@ -1,3 +1,3 @@
 export * from './auth';
-export * from './car';
+export * from './cart';
 export * from './home'

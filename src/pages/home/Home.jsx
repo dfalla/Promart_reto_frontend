@@ -20,7 +20,7 @@ export const Home = () => {
       <Grid 
         sx={{marginBottom: 5, paddingLeft: 5}}
         container 
-        direction={'row'}
+        direction={["column","column","row","row"]}
         columnSpacing={{ xs: 2, md: 5 }}
         wrap='nowrap'
         gap={2} 
@@ -34,14 +34,14 @@ export const Home = () => {
 
       <Grid 
         alignContent={'center'} 
-        container columnSpacing={{ xs: 2, md: 23 }} 
+        container columnSpacing={{ xs: 2, md: 20 }} 
         rowSpacing={{ xs: 2, md: 5 }} 
-        columns={{xs: 1, sm: 8,  md: 12}}
+        columns={{xs: 1, sm: 9,  md: 16}}
       >
         {
-          products.map(({description, price, image, id, category})=>(
-            <Grid item xs={2} sm={4} md={4} marginBottom={2} key={id}>
-              <CustomCard src={image} description={description} price={price} category={category} id={id}/>
+          products.map((product)=>(
+            <Grid item xs={2} sm={4} md={4} marginBottom={2} key={product.id}>
+              <CustomCard {...product}/>
             </Grid>
           ))
         }

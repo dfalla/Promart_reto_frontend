@@ -34,6 +34,7 @@ const settings = ['Logout'];
 
 export const Navbar = () => {
   const  { productsInCart } = useSelector(state => state.cart)
+  
   const { startLogout } = useAuthStore();
 
   const logout = () => startLogout();
@@ -59,7 +60,7 @@ export const Navbar = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth={["xs", "sm", "md", "xl"]}>
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -135,7 +136,9 @@ export const Navbar = () => {
                 color="inherit"
               >
                 <Badge badgeContent={productsInCart.length} color="error">
-                  <ShoppingCartIcon />
+                  <IconButton href='/carrito' color='white'>
+                    <ShoppingCartIcon/>  
+                  </IconButton>
                 </Badge>
               </IconButton>
               <Tooltip title="Open settings">

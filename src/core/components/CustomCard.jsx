@@ -1,22 +1,27 @@
-import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addProductInCart } from '../store';
+import { toast } from "react-toastify";
+import { addProductInCart, removeFromCart } from '../store';
 import { CONSTANTS } from '../';
 
-export const CustomCard = ({ src, description, price, category, id}) => {
+
+export const CustomCard = (product) => {
+  const { image, category, price, description, title } = product;
   const dispatch = useDispatch();
 
   const data = ( )=> {
-    dispatch(addProductInCart({ src, description, price, category, id}))
+    dispatch(addProductInCart(product))
+    toast.success("Product added to cart", {
+      position: "bottom-left",
+    });
   }
 
-  const otraFuncion = (id) => {
-    console.log('Eliminar producto', id)
+  const removeProductFromCart = (product) => {
+    dispatch(removeFromCart(product));
   }
 
   const disabled = window.location.href === CONSTANTS.CARRITO ? true : false;
@@ -24,17 +29,20 @@ export const CustomCard = ({ src, description, price, category, id}) => {
 
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 230, height: 360 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image={`${src}`}
+          image={`${image}`}
           alt="green iguana"
         />
         <CardContent>
-        <Typography gutterBottom variant="h5" component="div" textAlign={'center'}>
-           Categoria:  {category}
+        <Typography gutterBottom variant="h6" component="div" textAlign={'center'} color='primary'>
+            {title.slice(0, 10)}
+          </Typography>
+          <Typography textAlign={'center'}>
+            {category}
           </Typography>
           <Typography gutterBottom variant="h5" component="div" textAlign={'center'}>
             S/. {price}
@@ -47,10 +55,10 @@ export const CustomCard = ({ src, description, price, category, id}) => {
       <CardActions>
         <Button 
           size="small" 
-          // color={ !disabled ? 'error' : 'primary' } 
+          sx={{backgroundColor: disabled ? 'red': 'primary'}} 
           fullWidth 
           variant='contained' 
-          onClick={!disabled ? data : () => otraFuncion(id)}
+          onClick={!disabled ? data : () => removeProductFromCart(product)}
         >
           { !disabled ? 'Agregar al carrito' : 'Eliminar producto' }
         </Button>
@@ -59,10 +67,4 @@ export const CustomCard = ({ src, description, price, category, id}) => {
   );
 }
 
-CustomCard.propTypes = {
-  src: PropTypes.string.isRequired, 
-  description: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired
-};
+
