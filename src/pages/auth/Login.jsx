@@ -34,6 +34,8 @@ export const Login = () =>{
     },
   });
 
+  console.log('errors', errors)
+
   return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -49,7 +51,7 @@ export const Login = () =>{
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            PROMART CAR
+            PROMART CART
           </Typography>
             
             <form onSubmit={handleSubmit}>
@@ -64,9 +66,11 @@ export const Login = () =>{
                 value={values.username}
                 onChange={handleChange}
                 error={touched.username && Boolean(errors.username)}
-
                 helperText={touched.username && errors.username}
               />
+
+              <div style={{color: 'red'}}>{errors.username}</div>
+
               <TextField
                 margin="normal"
                 required
@@ -77,12 +81,12 @@ export const Login = () =>{
                 id="password"
                 value={values.password}
                 onChange={handleChange}
-                helperText={touched.paswword && errors.paswword}
-
                 error={touched.password && Boolean(errors.password)}
-
+                helperText={touched.password && errors.password}
               />
-      
+
+              <div style={{color: 'red'}}>{errors.password}</div>
+
               <Button
                 type="submit"
                 fullWidth

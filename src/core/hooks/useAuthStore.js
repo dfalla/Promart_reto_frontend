@@ -11,7 +11,6 @@ export const useAuthStore = () => {
     // const navigate = useNavigate();
 
     const startLogin = async ({username, password}) => {
-        console.log({username, password})
         dispatch(onChecking())
 
         try {
@@ -20,7 +19,12 @@ export const useAuthStore = () => {
             dispatch(onLogin({ name: data.nombre, uid: data.uid, token: data.token }));
 
         } catch (error) {
-            console.log(error);
+            console.log(error.response.data);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `${error.response.data.msg}`,
+              })
             dispatch(onLogout('Email o password incorrectos'))
         }
     }
