@@ -4,8 +4,25 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { addProductInCart } from '../store';
+import { CONSTANTS } from '../';
 
-export const CustomCard = ({ src, descripction, price, category}) => {
+export const CustomCard = ({ src, description, price, category, id}) => {
+  const dispatch = useDispatch();
+
+  const data = ( )=> {
+    dispatch(addProductInCart({ src, description, price, category, id}))
+  }
+
+  const otraFuncion = (id) => {
+    console.log('Eliminar producto', id)
+  }
+
+  const disabled = window.location.href === CONSTANTS.CARRITO ? true : false;
+
+
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -23,13 +40,19 @@ export const CustomCard = ({ src, descripction, price, category}) => {
             S/. {price}
           </Typography>
           <Typography variant="body2" color="text.secondary" textAlign={'center'}>
-            { descripction.slice(0, 40) }
+            { description.slice(0, 40) }
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" fullWidth variant='contained'>
-          Agregar al carrito
+        <Button 
+          size="small" 
+          // color={ !disabled ? 'error' : 'primary' } 
+          fullWidth 
+          variant='contained' 
+          onClick={!disabled ? data : () => otraFuncion(id)}
+        >
+          { !disabled ? 'Agregar al carrito' : 'Eliminar producto' }
         </Button>
       </CardActions>
     </Card>
@@ -38,7 +61,8 @@ export const CustomCard = ({ src, descripction, price, category}) => {
 
 CustomCard.propTypes = {
   src: PropTypes.string.isRequired, 
-  descripction: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired
 };

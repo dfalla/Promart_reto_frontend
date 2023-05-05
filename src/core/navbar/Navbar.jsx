@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
+import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -12,9 +13,12 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Stack from '@mui/material/Stack';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 import { useAuthStore } from '../hooks';
+import { useSelector } from 'react-redux';
 
 const pages = [
   {
@@ -29,6 +33,7 @@ const pages = [
 const settings = ['Logout'];
 
 export const Navbar = () => {
+  const  { productsInCart } = useSelector(state => state.cart)
   const { startLogout } = useAuthStore();
 
   const logout = () => startLogout();
@@ -53,7 +58,7 @@ export const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" style={{ background: '#121212' }}>
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -123,11 +128,22 @@ export const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" />
+            <Stack direction="row" spacing={2}>
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={productsInCart.length} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
               </IconButton>
-            </Tooltip>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" />
+                </IconButton>
+              </Tooltip>
+            </Stack>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
