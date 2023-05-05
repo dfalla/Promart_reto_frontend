@@ -35,7 +35,7 @@ export const Home = () => {
       <Grid 
         container
         direction={["column", "row", "row", "row"]}
-        justifyContent="center"
+        justifyContent={["center","flex-start","flex-start","flex-start"]}
         alignItems="center"
         paddingLeft={[0,5,5,5]}
         columnSpacing={{ xs: 2, sm: 0, md: 10 }} 

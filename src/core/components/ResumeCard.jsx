@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
 
 
 
@@ -18,9 +18,9 @@ export const ResumeCard = ({ total }) => {
           Total : S/.{ total }
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Comprar</Button>
-      </CardActions>
+      <Box textAlign={'center'} padding={1}>
+        <Button size="small" variant='outlined' fullWidth>Comprar</Button>
+      </Box>
     </Card>
   )
 }

@@ -120,13 +120,14 @@ export const Navbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map(({path, title}) => (
-              <Button
-                key={title}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <NavLink style={{textDecoration: 'none', color: 'inherit'}} to={`${path}`}>{title}</NavLink>
-              </Button>
+              <NavLink style={{textDecoration: 'none', color: 'inherit'}} to={`${path}`} key={title}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {title}
+                </Button>
+              </NavLink>
             ))}
           </Box>
 

@@ -63,8 +63,7 @@ export const AddAndDecreaseProductCard = (product) => {
             </Box>
             <Button 
                 size="small" 
-                sx={{backgroundColor: disabled ? 'red': 'primary'}} 
-                fullWidth 
+                sx={{backgroundColor: disabled ? 'red': 'primary', width: 200}} 
                 variant='contained' 
                 onClick={!disabled ? () => handleAddToCart(product) : () => removeProductFromCart(product)}
                 >
